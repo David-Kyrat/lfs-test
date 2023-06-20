@@ -5,7 +5,7 @@
 
 
 where.exe wkhtmltopdf 2>$null | Out-Null
-$wk_exists = $?
+#$wk_exists = $?
 if ($wk_exists) { echo "wkhtmltopdf is already installed"; Exit } 
 
 where.exe winget 2>$null | Out-Null
