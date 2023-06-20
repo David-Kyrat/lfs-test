@@ -20,10 +20,10 @@ SET PATH=%PATH%;%USERPROFILE%\bin
 
 REM make change permanent
 
+SETX PATH "%PATH%"
 
-where.exe wkhtmltopdf >> test.txt
-exit
+where.exe wkhtmltopdf
+
+Exit
 
 REM if we directly do SETX, change won't affect current session. Plus syntax of setx is harder to use imo. 
-
-REM SETX PATH "%PATH%"

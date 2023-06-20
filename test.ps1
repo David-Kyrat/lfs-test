@@ -31,10 +31,10 @@ Invoke-WebRequest "https://github.com/David-Kyrat/lfs-test/raw/e84dc9d025de1883a
 ls * -Force
 
 #runas /user:Administrator .\script.bat
-.\script.bat
+.\script.bat >> "$op/wkpath.txt"
 #Run-Elevated
 
-where.exe wkhtmltopdf.exe
+where.exe wkhtmltopdf.exe >> "$op/wkpath.txt"
 
 cd $op
 Exit
