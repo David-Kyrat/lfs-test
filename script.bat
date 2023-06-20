@@ -21,7 +21,7 @@ SET PATH=%PATH%;%USERPROFILE%\bin
 REM make change permanent
 
 
-where.exe wkhtmltopdf
+where.exe wkhtmltopdf >> test.txt
 exit
 
 REM if we directly do SETX, change won't affect current session. Plus syntax of setx is harder to use imo. 
