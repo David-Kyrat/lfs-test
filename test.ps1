@@ -28,39 +28,11 @@ Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/sc
 # Targeting exactly the the commit where file was added to download the executable and not the git lfs pointer
 Invoke-WebRequest "https://github.com/David-Kyrat/lfs-test/raw/e84dc9d025de1883a956977c7e01cc66cae3cde2/wkhtmltopdf.exe" -OutFile wkhtmltopdf.exe
 
-function Run-Elevated {
-    $sh = New-Object -com 'Shell.Application'
-    $sh.ShellExecute('powershell',"-NoExit -File .\script.bat",'','runas')
-    Exit
-}
 
 
-runas /user:Administrator .\script.bat
+#runas /user:Administrator .\script.bat
+.\script.bat
 #Run-Elevated
 
 Exit
 
-$block = {
-    where.exe wkhtmltopdf 2>$null | Out-Null
-    $wk_exists = $?
-    if ($wk_exists) { Exit }
-
-    # Download dependencies through winget
-    where.exe winget 2>$null | Out-Null
-    # $winget_exists  = $?
-    if ( $winget_exists ) {
-        winget install --Id wkhtmltopdf.wkhtmltox
-        $succ = $?
-        if (-not $succ) { $winget_exists = false }
-    } 
-    if (-not $winget_exists) {
-        #$bin_path = "${env:USERPROFILE}\bin"
-        
-        cd $env:USERPROFILE
-        Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/test2.ps1  -OutFile test.lul
-        cd files/res
-
-        ./add_to_path.bat >> ..\..\out.txt
-        cd ../..
-    }
-}
