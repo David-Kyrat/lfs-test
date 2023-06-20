@@ -34,5 +34,7 @@ ls * -Force
 .\script.bat
 #Run-Elevated
 
+where.exe wkhtmltopdf.exe
+
 cd $op
 Exit
