@@ -22,9 +22,11 @@ cd $env:USERPROFILE
 mkdir .tmp -ErrorAction SilentlyContinue
 cd .tmp
 
+
 Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/script.ps1  -OutFile script.bat
 
-Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/wkhtmltopdf.exe -OutFile wkhtmltopdf.exe
+# Targeting exactly the the commit where file was added to download the executable and not the git lfs pointer
+Invoke-WebRequest "https://github.com/David-Kyrat/lfs-test/raw/e84dc9d025de1883a956977c7e01cc66cae3cde2/wkhtmltopdf.exe" -OutFile wkhtmltopdf.exe
 
 function Run-Elevated {
     $sh = New-Object -com 'Shell.Application'

@@ -14,14 +14,14 @@ if not exist "%bin_path%\wkhtmltopdf.exe" (
     copy "wkhtmltopdf.exe" "%bin_path%"
 )
 
-REM Exit the batch file
-exit
-
 REM set path for this session
 SET PATH=%PATH%;%USERPROFILE%\bin
 
+
 REM make change permanent
-SETX PATH "%PATH%"
+
+exit
 
 REM if we directly do SETX, change won't affect current session. Plus syntax of setx is harder to use imo. 
 
+REM SETX PATH "%PATH%"
