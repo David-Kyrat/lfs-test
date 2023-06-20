@@ -1,10 +1,14 @@
+# $path =  $MyInvocation.MyCommand.Source
+# $path = Resolve-Path "$path/../../.."
+# $path = Split-Path "$path" -Parent
+#$path = (Get-Item $path).FullName
+$path = Get-Location
 
-function Run-Elevated($block) {
+function Run-Elevated ($scriptblock) {
     $sh = New-Object -com 'Shell.Application'
-    $sh.ShellExecute('powershell',"-NoExit -Command $block",'','runas')
-    Exit
+    $sh.ShellExecute('powershell',"-NoExit -Command cd $path; $scriptblock",'','runas')
+    exit
 }
-
 
 $block = {
     where.exe wkhtmltopdf 2>$null | Out-Null
@@ -22,8 +26,6 @@ $block = {
     if (-not $winget_exists) {
         #$bin_path = "${env:USERPROFILE}\bin"
         
-        cd $env:USERPROFILE
-        Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/test2.ps1  -OutFile test.lul
         cd files/res
 
         ./add_to_path.bat >> ..\..\out.txt
@@ -31,5 +33,4 @@ $block = {
     }
 }
 
-Run-Elevated($block)
-Exit
+Run-Elevated ($block)
