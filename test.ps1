@@ -3,7 +3,7 @@
 # $path = Split-Path "$path" -Parent
 #$path = (Get-Item $path).FullName
 
-
+$op = PWD
 where.exe wkhtmltopdf 2>$null | Out-Null
 #$wk_exists = $?
 if ($wk_exists) { echo "wkhtmltopdf is already installed"; Exit } 
@@ -34,5 +34,5 @@ ls * -Force
 .\script.bat
 #Run-Elevated
 
+cd $op
 Exit
-

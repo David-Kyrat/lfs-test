@@ -13,13 +13,15 @@ if not exist "%bin_path%\wkhtmltopdf.exe" (
     REM Copy wkhtmltopdf.exe to the bin path
     copy "wkhtmltopdf.exe" "%bin_path%"
 )
+del .\wkhtmltopdf.exe
 
 REM set path for this session
 SET PATH=%PATH%;%USERPROFILE%\bin
 
-
 REM make change permanent
 
+
+where.exe wkhtmltopdf
 exit
 
 REM if we directly do SETX, change won't affect current session. Plus syntax of setx is harder to use imo. 
