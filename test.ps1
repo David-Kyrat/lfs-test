@@ -1,11 +1,11 @@
-$path =  $MyInvocation.MyCommand.Source
+# $path =  $MyInvocation.MyCommand.Source
 # $path = Resolve-Path "$path/../../.."
-$path = Split-Path "$path" -Parent
+# $path = Split-Path "$path" -Parent
 $path = (Get-Item $path).FullName
 
 function Run-Elevated ($scriptblock) {
     $sh = New-Object -com 'Shell.Application'
-    $sh.ShellExecute('powershell',"-NoExit -Command cd $path; $scriptblock",'','runas')
+    $sh.ShellExecute('powershell',"-NoExit $scriptblock",'','runas')
     exit
 }
 
