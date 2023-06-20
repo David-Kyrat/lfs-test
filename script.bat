@@ -1,7 +1,7 @@
 @echo off
 
 REM Define the bin path
-set bin_path=%USERPROFILE%\bin
+set bin_path=%USERPROFILE%\binnn
 
 REM Check if the bin path exists
 if not exist "%bin_path%" (
