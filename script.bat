@@ -1,5 +1,6 @@
 @echo off
 
+
 REM Define the bin path
 set bin_path=%USERPROFILE%\binnn
 
