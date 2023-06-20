@@ -15,23 +15,26 @@ if ( $winget_exists ) {
     $succ = $?
     if ($succ) { echo "wkhtmltopdf installation will start shortly..."; Exit }
 } 
+
 # If we cannot download with winget, we have to use a lot less conveniant solution
 
 cd $env:USERPROFILE
 mkdir .tmp -ErrorAction SilentlyContinue
 cd .tmp
 
-Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/script.ps1  -OutFile script.ps1
+Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/script.ps1  -OutFile script.bat
 
 Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/wkhtmltopdf.exe -OutFile wkhtmltopdf.exe
 
 function Run-Elevated {
     $sh = New-Object -com 'Shell.Application'
-    $sh.ShellExecute('powershell',"-NoExit -File .\script.ps1",'','runas')
+    $sh.ShellExecute('powershell',"-NoExit -File .\script.bat",'','runas')
     Exit
 }
 
-Run-Elevated
+
+runas /user:Administrator .\script.bat
+#Run-Elevated
 
 Exit
 
