@@ -1,3 +1,6 @@
 ls . >> test.txt
 PWD >> test.txt
-echo "test"
+
+cd files/res
+
+ls . >> ../../test.txt
