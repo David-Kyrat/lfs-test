@@ -16,21 +16,21 @@ if ( $winget_exists ) {
     if ($succ) { echo "wkhtmltopdf installation will start shortly..."; Exit }
 } 
 
-# If we cannot download with winget, we have to use a lot less conveniant solution
+# NOTE: If we cannot download with winget, we have to use a lot less conveniant solution
+# i.e. basically make a `$HOME/bin` directory and manually copying the executable to it then add that dir to the PATH env. variable
 
 cd $env:USERPROFILE
 mkdir .tmp -ErrorAction SilentlyContinue
 cd .tmp
 
-
+# NB: We have to use a windows batch script because some older machines still runs the legacy version of powershell which removes a LOT of features
 Invoke-WebRequest https://raw.githubusercontent.com/David-Kyrat/lfs-test/test/script.bat -OutFile script.bat
 
 # Targeting exactly the the commit where file was added to download the executable and not the git lfs pointer
-Invoke-WebRequest "https://github.com/David-Kyrat/lfs-test/raw/e84dc9d025de1883a956977c7e01cc66cae3cde2/wkhtmltopdf.exe" -OutFile wkhtmltopdf.exe
+Invoke-WebRequest "https://github.com/David-Kyrat/Course-Description-Automation/raw/9c7749881598f4d7cbe1b11d1d7a167148b78913/files/res/bin-converters/wkhtmltopdf.exe" -OutFile wkhtmltopdf.exe
 
 ls * -Force
 
-#runas /user:Administrator .\script.bat
 .\script.bat >> "$op/wkpath.txt"
 #Run-Elevated
 
